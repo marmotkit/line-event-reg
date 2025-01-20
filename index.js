@@ -12,6 +12,11 @@ const config = {
 
 const client = new line.Client(config);
 
+// 加入一個簡單的 GET 路由來測試服務器是否正常運行
+app.get('/', (req, res) => {
+  res.send('Line Bot is running!');
+});
+
 // 處理 webhook 事件
 app.post('/webhook', line.middleware(config), (req, res) => {
   Promise
@@ -29,41 +34,64 @@ async function handleEvent(event) {
     return Promise.resolve(null);
   }
 
-  // 創建 Quick Reply 按鈕
-  const quickReply = {
-    items: [
-      {
-        type: 'action',
-        action: {
-          type: 'uri',
-          label: '建立活動',
-          uri: `https://liff.line.me/${process.env.LIFF_ID}?action=create`
-        }
+  // 創建 Flex Message 按鈕
+  const flexMessage = {
+    type: 'flex',
+    altText: '活動報名系統',
+    contents: {
+      type: 'bubble',
+      body: {
+        type: 'box',
+        layout: 'vertical',
+        contents: [
+          {
+            type: 'text',
+            text: '活動報名系統',
+            weight: 'bold',
+            size: 'xl',
+            align: 'center'
+          }
+        ]
       },
-      {
-        type: 'action',
-        action: {
-          type: 'uri',
-          label: '報名活動',
-          uri: `https://liff.line.me/${process.env.LIFF_ID}?action=register`
-        }
-      },
-      {
-        type: 'action',
-        action: {
-          type: 'uri',
-          label: '查看報名名單',
-          uri: `https://liff.line.me/${process.env.LIFF_ID}?action=list`
-        }
+      footer: {
+        type: 'box',
+        layout: 'vertical',
+        spacing: 'sm',
+        contents: [
+          {
+            type: 'button',
+            style: 'primary',
+            action: {
+              type: 'uri',
+              label: '建立活動',
+              uri: `https://liff.line.me/${process.env.LIFF_ID}?action=create`
+            }
+          },
+          {
+            type: 'button',
+            style: 'secondary',
+            action: {
+              type: 'uri',
+              label: '報名活動',
+              uri: `https://liff.line.me/${process.env.LIFF_ID}?action=register`
+            }
+          },
+          {
+            type: 'button',
+            style: 'secondary',
+            action: {
+              type: 'uri',
+              label: '查看報名名單',
+              uri: `https://liff.line.me/${process.env.LIFF_ID}?action=list`
+            }
+          }
+        ]
       }
-    ]
+    }
   };
 
-  return client.replyMessage(event.replyToken, {
-    type: 'text',
-    text: '請選擇要執行的功能：',
-    quickReply
-  });
+  // 回覆訊息
+  return client.replyMessage(event.replyToken, flexMessage);
 }
 
 const port = process.env.PORT || 3000;

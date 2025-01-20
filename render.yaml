@@ -6,8 +6,8 @@ services:
     startCommand: npm start
     envVars:
       - key: CHANNEL_ACCESS_TOKEN
-        sync: false
+        value: EJ8n0hrjiZoWh/utEb+b4xByCsnZ9gIJYXSK/UiJv1A4kT78bRvgV1X4Hxi33XivJ4jaod/+25joSLS2UcFglIZfScBFzsFc6AP6V+Xwya5kHnDEsxD+2DOK5zmpHfaWgOWK0bkL4wkGMJb/cwwYNgdB04t89/1O/w1cDnyilFU=
       - key: CHANNEL_SECRET
-        sync: false
+        value: 17ba892526d2ef1ca15d4c279613669e
       - key: LIFF_ID
-        sync: false 
+        value: 2006775715-K85MWx3a 
