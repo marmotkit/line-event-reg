@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: line-event-registration-bot
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: CHANNEL_ACCESS_TOKEN
+        sync: false
+      - key: CHANNEL_SECRET
+        sync: false
+      - key: LIFF_ID
+        sync: false 
