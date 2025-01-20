@@ -64,7 +64,7 @@ async function handleEvent(event) {
             action: {
               type: 'uri',
               label: '建立活動',
-              uri: 'https://event-registration-la1k.onrender.com/login'
+              uri: `https://liff.line.me/${process.env.LIFF_ID}?redirect=login`
             }
           },
           {
