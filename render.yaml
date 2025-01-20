@@ -1,9 +1,12 @@
 services:
   - type: web
     name: line-event-registration-bot
-    env: node
+    runtime: node
+    plan: free
     buildCommand: npm install
     startCommand: npm start
+    repo: https://github.com/marmotkit/line-event-reg.git
+    branch: main
     envVars:
       - key: CHANNEL_ACCESS_TOKEN
         value: EJ8n0hrjiZoWh/utEb+b4xByCsnZ9gIJYXSK/UiJv1A4kT78bRvgV1X4Hxi33XivJ4jaod/+25joSLS2UcFglIZfScBFzsFc6AP6V+Xwya5kHnDEsxD+2DOK5zmpHfaWgOWK0bkL4wkGMJb/cwwYNgdB04t89/1O/w1cDnyilFU=
